@@ -1,0 +1,177 @@
+<form action="">
+  <label (click)="changeObjs(auths.value);justchatting('medias')" >
+    <input #auths type="radio" name="gender" value="authors" >
+    Authors
+  </label><br>
+  <label (click)="changeObjs(meds.value) " >
+    <input #meds type="radio" name="gender" value="medias">
+    Medias<br>
+  </label>
+</form>
+
+<div>
+  <table *ngIf="isMedias else notMedias" class="table ">
+  <h2>Media</h2>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Author</th>
+      <th scope="col">Name</th>
+      <th scope="col">Date Published</th>
+      <th scope="col">Media Genre</th>
+      <th scope="col">Media Type</th>
+      <th scope="col">Description</th>
+    </tr>
+    <tr *ngFor="let media of list">
+      <td>{{media.id}}</td>
+      <td><input type="text" [(ngModel)]="media.author"></td>
+      <td><input type="text" [(ngModel)]="media.name"></td>
+      <td><input type="text" [(ngModel)]="media.date_published"></td>
+      <td><input type="text" [(ngModel)]="media.mgenre"></td>
+      <td><input type="text" [(ngModel)]="media.mtype"></td>
+      <td><input type="text" [(ngModel)]="media.description"></td>
+      <td><input (click)="eraseMedia(media)" type="button" value="Delete"></td>
+      <td><input (click)="editMedia(media)" type="button" value="Edit"></td>
+    </tr>
+  </table>
+
+  <div *ngIf="isMedias">
+    <h2>Add media</h2>
+    <!-- Add media custom HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-->
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="authorOpt" >Author: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+        <select id="authorOpt" [(ngModel)]="mediaToAdd.author" >
+          <option *ngFor="let sad of list2" [ngValue]="sad.id" > {{sad.name + " " +sad.surname }}</option>
+        </select>
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="mediaName" >Title: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+       <input id="mediaName" type="text" [(ngModel)]="mediaToAdd.name" placeholder="Title">
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="mediaGenre" >Genre: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+
+        <select id="mediaGenre" [(ngModel)]="mediaToAdd.mgenre">
+          <option [ngValue]="Action" > Action</option>
+          <option [ngValue]="Drama" > Drama</option>
+          <option [ngValue]="Adventure"> Adventure</option>
+          <option [ngValue]="Comedy"> Comedy</option>
+          <option [ngValue]="Syfy"> Syfy</option>
+        </select>
+
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="mediaType" >Type: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+
+        <select id="mediaType" [(ngModel)]="mediaToAdd.mtype">
+          <option [ngValue]="Book" > Book</option>
+          <option [ngValue]="Movie" > Movie</option>
+        </select>
+
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="datepub" >Date Published: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+
+        <input id="datepub" type="date" [(ngModel)]="mediaToAdd.date_published" placeholder="07-07-2007">
+
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="desc" >Description: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+
+        <textarea id="desc" rows="7" cols="25" type="text" [(ngModel)]="mediaToAdd.description" placeholder="Write here..."></textarea>
+
+      </span>
+    </div>
+
+    <div class="row">
+
+      <span class="col-md-12 col-sm-12 col-lg-12">
+
+       <input type="submit" class="btn btn-dark" value="Add" (click)="addMedia()">
+
+      </span>
+    </div>
+  </div>
+
+  <ng-template #notMedias>
+    <table class="table">
+    <h2>Media Authors</h2>
+    <tr>
+      <th scope="col">ID</th >
+      <th scope="col">Name</th>
+      <th scope="col">Surname</th>
+      <th scope="col">Image</th>
+    </tr>
+    <tr *ngFor="let mediaauth of list">
+      <td>{{mediaauth.id}}</td>
+      <td><input type="text" [(ngModel)]="mediaauth.name"></td>
+      <td><input type="text" [(ngModel)]="mediaauth.surname"></td>
+      <td>{{mediaauth.img}}</td>
+      <td><input (click)="eraseAuthor(mediaauth)" type="button" value="Delete"></td>
+      <td><input (click)="editAuthor(mediaauth)" type="button" value="Edit"></td>
+    </tr>
+    </table>
+  </ng-template>
+
+  <div *ngIf="!isMedias" >
+    <h2>Add Author</h2>
+    <!-- Add Author custom HAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA-->
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="autName" >Name: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+       <input id="autName" type="text" [(ngModel)]="authorToAdd.name" placeholder="Name">
+      </span>
+    </div>
+
+    <div class="row">
+      <span class="col-md-2 col-sm-12 col-lg-2" style="text-align: right">
+        <label for="autSName" >Surname: </label>
+      </span>
+      <span class="col-md-10 col-sm-12 col-lg-10">
+       <input id="autSName" type="text" [(ngModel)]="authorToAdd.surname" placeholder="Name">
+      </span>
+    </div>
+
+    <div class="row">
+
+      <span class="col-md-12 col-sm-12 col-lg-12">
+
+       <input type="submit" class="btn btn-dark" value="Add" (click)="addAuthor()">
+
+      </span>
+    </div>
+
+
+  </div>
+
+</div>

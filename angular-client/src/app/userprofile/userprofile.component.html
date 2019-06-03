@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5" *ngIf="currentUser">
+      <span *ngIf="sameUser else notSame">
+        <table class="table" width="100%">
+        <tr>
+          <th width="30%">Username</th>
+          <td>{{currentUser.admin.username}}</td>
+        </tr>
+        <tr>
+          <th width="30%">Email</th>
+          <td><input type="text" [(ngModel)]="currentUser.admin.email"></td>
+        </tr>
+        <tr>
+          <th width="30%">Date Joined</th>
+          <td>{{currentUser.admin.date_joined}}</td>
+        </tr>
+        <tr>
+          <th width="30%">Name</th>
+          <td><input type="text" [(ngModel)]="currentUser.admin.first_name"></td>
+          <td><input type="text" [(ngModel)]="currentUser.admin.last_name"></td>
+        </tr>
+        <tr>
+          <th width="30%">Last Login</th>
+          <td>{{currentUser.admin.last_login}}</td>
+        </tr>
+        <tr>
+          <th width="30%">User Type</th>
+          <td>
+            <span *ngIf="currentUser.admin.is_superuser; else loggedOut">
+            Superuser
+            </span>
+            <ng-template #loggedOut>
+            Regular user
+            </ng-template>
+          </td>
+        </tr>
+      </table>
+      </span>
+      <ng-template #notSame>
+        <table class="table" width="100%">
+          <tr>
+            <th width="30%">Username</th>
+            <td>{{currentUser.admin.username}}</td>
+          </tr>
+          <tr>
+            <th width="30%">Email</th>
+            <td>{{currentUser.admin.email}}</td>
+          </tr>
+          <tr>
+            <th width="30%">Date Joined</th>
+            <td>{{currentUser.admin.date_joined}}</td>
+          </tr>
+          <tr>
+            <th width="30%">Name</th>
+            <td>{{currentUser.admin.first_name}}</td>
+            <td>{{currentUser.admin.last_name}}</td>
+          </tr>
+          <tr>
+            <th width="30%">Last Login</th>
+            <td>{{currentUser.admin.last_login}}</td>
+          </tr>
+          <tr>
+            <th width="30%">User Type</th>
+            <td>
+            <span *ngIf="currentUser.admin.is_superuser; else loggedOut">
+            Superuser
+            </span>
+              <ng-template #loggedOut>
+                Regular user
+              </ng-template>
+            </td>
+          </tr>
+        </table>
+      </ng-template>
+
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-6" style="align-content: center">
+      <p><h5>Profile Image</h5>
+      <img width="200px" height="200px" alt="" src="http://tpw028071981258.pythonanywhere.com/{{currentUser.user.img}}">
+      <span *ngIf="sameUser">
+        <input class="btn btn-primary" type="button" value="Edit!" (click)="editUser()">
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <h2>{{currentUser.admin.first_name}}'s reviews:</h2>
+    <style>
+      td {
+        -ms-word-break: break-all;
+        word-break: break-all;}
+
+    </style>
+    <table class="table-striped table-" width="100%">
+      <thead>
+      <tr>
+        <th style="word-wrap: break-word; max-width: 30px">#</th>
+        <th style="word-wrap: break-word; max-width: 100px">Movie Name</th>
+        <th style="word-wrap: break-word; max-width: 100px">User Rating</th>
+        <th style="word-wrap: break-word; max-width: 100px">Review</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let review of reviews ;let i = index">
+          <td>{{i}}</td>
+          <td><a routerLink="/media/{{review.media}}">{{review.media_name}}</a></td>
+          <td>{{review.rate}}</td>
+          <td>{{review.review}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

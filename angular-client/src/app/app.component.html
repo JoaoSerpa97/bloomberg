@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" routerLink=".">ReviewLords</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="">Home</a>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" *ngIf="user" (click)="ownProfile()">My profile</span>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" *ngIf="user" routerLink="/manage">Manage Database</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <span *ngIf="user">
+        Welcome <b>{{user.admin.username}}</b>!
+        <input class="btn btn-primary" type="button" (click)="logout()" value="Log out!">
+      </span>
+      <span *ngIf="!user">
+        <input class="btn btn-primary" type="button" routerLink="/login" value="Login!">
+      </span>
+    </ul>
+  </div>
+</nav>
+
+<main role="main">
+  <p></p>
+  <div class="container body-content">
+    <router-outlet></router-outlet>
+  </div>
+</main>
+

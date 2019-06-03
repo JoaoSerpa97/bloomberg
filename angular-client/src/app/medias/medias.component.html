@@ -1,0 +1,87 @@
+<div class="row lels" style="padding-bottom: 10px">
+    <input #searchParam type="text" class="lels">
+    <input type="button" class="btn lels" value="Search" (click)="redefineMedias(searchParam.value)">
+</div>
+
+
+<!--Custom style for template -->
+<style type="text/css">
+
+  .demo-item .image img {
+    border: 1px solid #f1f1f1;
+    height: 100%;
+
+  }
+
+  .demo-item:hover .image {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    height: 80%;
+
+  }
+
+  .demo-item .image::after {
+    display: none;
+    height: 100%;
+
+  }
+
+  .demo-item .image i {
+    display: none;
+    height: 100%;
+
+  }
+
+  .single-feature .content h4 {
+    line-height: 1;
+    height: 10%;
+  }
+
+  .demo-item .title a:hover {
+    color: #061da4;
+    height: 10%;
+  }
+
+  .demo-item .title {
+    text-transform: capitalize;
+    font-weight: 500;
+    margin-top: 20px;
+    height: 30%;
+  }
+
+  .demo-item .title span {
+    font-size: 13px;
+    height: 10%;
+  }
+
+  .hero-content h1 {
+    text-transform: none;
+  }
+
+  .hero-content h1 strong {
+    text-transform: capitalize;
+  }
+
+  .logo a, .stick .logo a {
+    width: auto;
+    height: 100%;
+  }
+
+  @media only screen and (max-width: 479px) {
+    .logo a, .stick .logo a {
+      width: 140px;
+    }
+  }
+  </style>
+
+<!--Best rated movies list-->
+<div class="row">
+      <div id="moview" class="col-lg-4 col-md-4 col-sm-12 mb-50" *ngFor="let media of medias">
+        <div class="demo-item">
+          <h5 style="background-color: grey; opacity: 1; color: white;  border-radius: 25px;">{{media.name}}</h5>
+          <a routerLink="../media/{{ media.id }}" class="image" style="height: 90%;width: 100%">
+            <img  src="http://tpw028071981258.pythonanywhere.com{{ media.img }}" alt="{{media.name}}" style="height: 100%;">
+          </a>
+
+        </div>
+      </div>
+</div>

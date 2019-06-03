@@ -1,0 +1,276 @@
+<!--Star bars style-->
+<style>
+
+  .bar-5{
+    height: 18px;
+    background-color: #4CAF50;
+  }
+
+  .bar-4 {
+    height: 18px;
+    background-color: #2196F3;
+
+  }
+
+  .bar-3 {
+    height: 18px;
+    background-color: #00bcd4;
+
+  }
+
+  .bar-2 {
+    height: 18px;
+    background-color: #ff9800;
+
+  }
+
+  .bar-1 {
+    height: 18px;
+    background-color: #f44336;
+
+  }
+
+  /*
+  Rating
+   */
+  * {
+    box-sizing: border-box;
+  }
+  .fa {
+    font-size: 25px;
+  }
+  .checked {
+    color: orange;
+  }
+  /* Three column layout */
+  .side {
+    float: left;
+    width: 15%;
+    margin-top: 10px;
+  }
+  .middle {
+    float: left;
+    width: 70%;
+    margin-top: 10px;
+  }
+  /* Place text to the right */
+  .right {
+    text-align: right;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* The bar container */
+  .bar-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    text-align: center;
+    color: white;
+  }
+  /* Responsive layout - make the columns stack on top of each other instead of next to each other */
+  @media (max-width: 400px) {
+    .side, .middle {
+      width: 100%;
+    }
+    /* Hide the right column on small screens */
+    .right {
+      display: none;
+    }
+  }
+</style>
+
+
+<!--Rating-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="row" style="padding-bottom: 40px">
+  <div class="col-lg-5 col-md-5 col-sm-5">
+    <div class="demo-item">
+      <a href="" class="image">
+        <img src="http://tpw028071981258.pythonanywhere.com/{{ currentMedia.img }}" alt=""></a>
+    </div>
+  </div>
+
+  <!--Movie description-->
+  <div class="col-lg-7 col-md-7 col-sm-7">
+    <!--Rating-->
+
+    <span class="heading">User Rating</span>
+    <!--Show the ratings as stars (hard coded)-->
+
+    <span *ngIf="avg == 5">
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <p>{{ realavg }} average based on {{ reviews.length }} reviews.</p>
+    </span>
+
+    <span *ngIf="avg == 4">
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star "></span>
+      <p>{{ realavg }} average based on {{ reviews.length }} reviews.</p>
+    </span>
+    <span *ngIf="avg == 3">
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <p>{{ realavg }} average based on {{ reviews.length }} reviews.</p>
+    </span>
+    <span *ngIf="avg == 2">
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <p>{{ realavg }} average based on {{ reviews.length }} reviews.</p>
+    </span>
+    <span *ngIf="avg == 1">
+      <span class="fa fa-star checked"></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <p>{{ realavg }} average based on {{ reviews.length }} reviews.</p>
+    </span>
+    <span *ngIf="avg == 0">
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <span class="fa fa-star "></span>
+      <p>No reviews have been posted.</p>
+    </span>
+
+
+    <hr style="border:3px solid #f1f1f1">
+
+
+    <div class="row">
+      <div class="side">
+        <div>5 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-5" [style.width.%]="fiveperc"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>{{ five }}</div>
+      </div>
+      <div class="side">
+        <div>4 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-4" [style.width.%]="fourperc"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>{{ four }}</div>
+      </div>
+      <div class="side">
+        <div>3 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-3" [style.width.%]="threeperc"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>{{ three }}</div>
+      </div>
+      <div class="side">
+        <div>2 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-2" [style.width.%]="twoperc"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>{{ two }}</div>
+      </div>
+      <div class="side">
+        <div>1 star</div>
+      </div>
+      <div class="middle">
+        <div class="bar-container">
+          <div class="bar-1" [style.width.%]="oneperc"></div>
+        </div>
+      </div>
+      <div class="side right">
+        <div>{{ one }}</div>
+      </div>
+    </div>
+
+    <!--desc-->
+
+    <p style="padding-top: 20px"><strong>Description</strong><br>{{ currentMedia.description }}</p>
+
+  </div>
+</div>
+
+<!--Add review here-->
+<div class="jumbotron" style="margin-top: 2px">
+  <h3>Tell us what you think...</h3>
+<div class="row">
+  <span class="col-md-1" style="text-align: right">
+    <label for="etat">Rate: </label>
+  </span>
+  <span class="col-md-11">
+    <select [(ngModel)]="review.rate" id="etat" style="height: 100%; width: 30%; font-size: 20px">
+      <option [ngValue]="1">1</option>
+      <option [ngValue]="2">2</option>
+      <option [ngValue]="3">3</option>
+      <option [ngValue]="4">4</option>
+      <option [ngValue]="5">5</option>
+    </select>
+  </span>
+</div>
+
+
+
+  <div class="row">
+  <span class="col-md-1">
+    <label for="textboxid">Review: </label>
+  </span>
+    <span class="col-md-11">
+      <textarea id="textboxid" rows="7" cols="25"[(ngModel)]="review.review" type="text" style="width: 80%" ></textarea>
+  </span>
+  </div>
+  <div class="row">
+    <p class="lead col-md-12">
+    <input (click)="addReview(review)" type="button" class="btn btn-dark btn-lg" style="width: 100%;" value="Add">
+    </p>
+  </div>
+</div>
+
+<!--All other reviews here-->
+<div class="card">
+  <div class="card-body">
+    <div class="row" *ngFor="let review of reviews">
+      <div class="col-md-2">
+        <img src="http://tpw028071981258.pythonanywhere.com/media/{{ review.img }}" class="img img-rounded img-fluid"/>
+      </div>
+      <div class="col-md-10">
+        <p>
+          <a class="float-left" routerLink="/user/{{ review.author }}"><strong>{{ review.username }}</strong></a>
+        </p>
+        <div class="clearfix"></div>
+        <p>{{ review.review }}</p>
+        <br>
+        <p><strong>Rated: {{ review.rate }} Stars</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
